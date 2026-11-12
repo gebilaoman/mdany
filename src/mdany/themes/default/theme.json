@@ -1,0 +1,10 @@
+{
+  "diagram": {
+    "font": "PingFang SC,Hiragino Sans GB,Noto Sans CJK SC,Microsoft YaHei,sans-serif",
+    "ink": "#1A202C",
+    "stroke": "#37474F",
+    "fill": "#F7F8FA",
+    "fill_decision": "#EEF2F6",
+    "lifeline": "#90A4AE"
+  }
+}

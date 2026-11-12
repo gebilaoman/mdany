@@ -1,0 +1,44 @@
+/* mdany default theme, PDF (weasyprint). Origin: itaskid pdf-style.css. */
+@page {
+  size: A4;
+  margin: 20mm 16mm;
+  @top-center { font-size: 9pt; color: #888; }   /* content: option `header` */
+  @bottom-center { content: counter(page); font-size: 9pt; color: #888; }
+}
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.65;
+  color: #222;
+}
+h1 { font-size: 20pt; border-bottom: 2px solid #444; padding-bottom: 6px; }
+h2 { font-size: 15pt; margin-top: 1.4em; border-bottom: 1px solid #bbb; padding-bottom: 4px; }
+h3 { font-size: 12.5pt; margin-top: 1.2em; }
+table { border-collapse: collapse; width: 100%; font-size: 9pt; margin: 8px 0; }
+/* Long values in cells get break points after , ( . / (formats/pdf/table_breaks.py), so
+   enum('a','b','c') wraps instead of pushing the table past the page edge. */
+th, td { border: 1px solid #999; padding: 4px 7px; overflow-wrap: break-word; vertical-align: top; }
+th { background: #f0f0f0; }
+img { max-width: 100%; }
+img[src$=".svg"] { display: block; margin: 8px auto; max-width: 100%; max-height: 110mm; }
+/* word-break: break-all on code too: pandoc wraps each highlighted line in an inline-block
+   span, where overflow-wrap alone does not break a long token such as a{b,c,d}. */
+pre { background: #f6f6f6; border: 1px solid #ddd; padding: 8px; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code, pre code span { white-space: pre-wrap; word-break: break-all; }
+/* CJK fonts must follow the mono fonts: otherwise fallback may pick a Japanese font
+   without simplified glyphs (页, 码 -> tofu). Design 10.1 item 10. */
+code { font-family: Menlo, Consolas, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
+  "Microsoft YaHei", monospace; font-size: 0.9em; }
+#TOC ul { list-style: none; padding-left: 1em; }
+.mdany-page-break { break-before: page; }
+div.mdany-page-break { height: 0; margin: 0; }
+/* option fit_code_to_page: the font size is set inline on pre or its wrapper div */
+pre.mdany-fit { font-size: inherit; line-height: inherit; break-inside: avoid; }
+pre.mdany-fit code { font-size: 1em; }
+hr { border: 0; border-top: 1px solid #bbb; margin: 1.2em 0; }
+/* GFM task lists: keep the checkbox on the same line as its text */
+ul.task-list { list-style: none; padding-left: 1.2em; }
+ul.task-list li label { display: inline; }
+ul.task-list input[type="checkbox"] {
+  display: inline-block; width: 0.85em; height: 0.85em; margin: 0 0.45em 0 0; vertical-align: -0.1em;
+}

@@ -1,0 +1,29 @@
+# mdany demo project. Same layout as a software-copyright submission package.
+# Run from this directory:  uv run mdany build
+
+[project]
+source  = "md"
+include = ["阶段*/*.md"]
+skip    = ["阶段1/内部说明.md"]             # internal note, not part of the package
+copy    = [                                 # copied as-is next to the converted files
+  "阶段6/6.2-项目配置",
+  "阶段6/6.4-数据库脚本.sql",
+]
+name = "{parent}-{stem}"                    # 阶段2/2.5-业务流程图.md -> 阶段2-2.5-业务流程图.pdf
+
+[output.pdf]
+dir = "pdf"
+
+[output.docx]
+dir = "word"
+
+[defaults]
+toc = true
+toc_depth = 2
+
+[[override]]                                # source code excerpt: one "第 N 页" per page
+match = "阶段6/6.1-源代码摘录.md"
+page_break_before = "h2"
+header = "示例软件 V1.0.0"
+fit_code_to_page = true                     # shrink code font so 50 lines fit one page
+toc = false
