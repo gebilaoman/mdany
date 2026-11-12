@@ -9,15 +9,38 @@ Convert a set of Markdown documents into a PDF / DOCX submission package.
 
 Status: in development (target v0.1.0: replace the build scripts of one real project).
 
+## Install
+
+```bash
+uv tool install git+https://github.com/gebilaoman/mdany
+mdany doctor               # checks pandoc, weasyprint (pango), graphviz, rsvg-convert
+```
+
+pandoc comes with the Python package. Install the system parts first:
+
+- macOS: `brew install uv pango graphviz librsvg`
+- Debian / Ubuntu: `sudo apt-get install libpango-1.0-0 libpangoft2-1.0-0 graphviz librsvg2-bin fonts-noto-cjk`
+- Windows (PowerShell):
+
+  ```powershell
+  winget install --id=astral-sh.uv -e
+  winget install --id=Git.Git -e
+  winget install --id=MSYS2.MSYS2 -e
+  C:\msys64\usr\bin\bash.exe -lc "pacman -S --needed --noconfirm mingw-w64-x86_64-pango mingw-w64-x86_64-graphviz mingw-w64-x86_64-librsvg"
+  $bin = "C:\msys64\mingw64\bin"
+  [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$bin", "User")
+  [Environment]::SetEnvironmentVariable("WEASYPRINT_DLL_DIRECTORIES", $bin, "User")
+  [Environment]::SetEnvironmentVariable("PYTHONUTF8", "1", "User")
+  ```
+
+  Open a new PowerShell window after this. CI runs the tests on Windows with the same setup.
+
 ## Install (development)
 
 ```bash
 uv sync
-uv run mdany doctor        # checks pandoc, weasyprint (pango), graphviz, rsvg-convert
+uv run mdany doctor
 ```
-
-pandoc comes with the Python package. Install the others with your system package manager,
-for example on macOS: `brew install pango graphviz librsvg`.
 
 ## Use
 

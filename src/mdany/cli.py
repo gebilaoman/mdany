@@ -139,6 +139,10 @@ def cmd_doctor(_args: argparse.Namespace) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
+    # A Windows console or redirect may use a legacy code page (e.g. GBK) that has no ✓.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(errors="replace")
     args = _parser().parse_args(argv)
     try:
         if args.command == "convert":

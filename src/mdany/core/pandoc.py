@@ -38,14 +38,18 @@ def pandoc_path() -> str:
 
 @cache
 def pandoc_version() -> tuple[int, ...]:
-    out = subprocess.run([pandoc_path(), "--version"], capture_output=True, text=True, check=True)
+    out = subprocess.run(
+        [pandoc_path(), "--version"], check=True,
+        capture_output=True, text=True, encoding="utf-8", errors="replace",
+    )
     first = out.stdout.splitlines()[0]  # "pandoc 3.9"
     return tuple(int(x) for x in first.split()[1].split(".") if x.isdigit())
 
 
 def _run(args: list[str], stdin: str) -> str:
     proc = subprocess.run(
-        [pandoc_path(), *args], input=stdin, capture_output=True, text=True
+        [pandoc_path(), *args], input=stdin,
+        capture_output=True, text=True, encoding="utf-8", errors="replace",
     )
     if proc.returncode != 0:
         raise MdanyError(f"pandoc failed ({' '.join(args)}):\n{proc.stderr.strip()}")

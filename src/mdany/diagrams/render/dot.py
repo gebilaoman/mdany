@@ -61,7 +61,10 @@ def render(chart: Flowchart, style: DiagramStyle, out: Path) -> Path:
     if fmt == "png":
         args.insert(1, f"-Gdpi={PNG_DPI}")
     try:
-        proc = subprocess.run(args, input=to_dot(chart, style), capture_output=True, text=True)
+        proc = subprocess.run(
+            args, input=to_dot(chart, style),
+            capture_output=True, text=True, encoding="utf-8", errors="replace",
+        )
     except FileNotFoundError:
         raise MdanyError("graphviz `dot` not found. Run `mdany doctor`.", exit_code=2) from None
     if proc.returncode != 0:

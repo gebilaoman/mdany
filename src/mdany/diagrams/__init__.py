@@ -16,13 +16,13 @@ GRAPHVIZ = binary("dot", {
     "macos": "brew install graphviz",
     "debian": "sudo apt-get install -y graphviz",
     "fedora": "sudo dnf install -y graphviz",
-    "windows": "choco install graphviz",
+    "windows": "MSYS2: pacman -S mingw-w64-x86_64-graphviz; add C:\\msys64\\mingw64\\bin to PATH",
 })
 RSVG = binary("rsvg-convert", {
     "macos": "brew install librsvg",
     "debian": "sudo apt-get install -y librsvg2-bin",
     "fedora": "sudo dnf install -y librsvg2-tools",
-    "windows": "choco install rsvg-convert",
+    "windows": "MSYS2: pacman -S mingw-w64-x86_64-librsvg; add C:\\msys64\\mingw64\\bin to PATH",
 })
 
 

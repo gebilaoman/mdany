@@ -14,7 +14,7 @@ def svg_to_png(svg: Path, png: Path) -> Path:
     try:
         proc = subprocess.run(
             ["rsvg-convert", "-z", str(ZOOM), "-o", str(png), str(svg)],
-            capture_output=True, text=True,
+            capture_output=True, text=True, encoding="utf-8", errors="replace",
         )
     except FileNotFoundError:
         raise MdanyError("`rsvg-convert` not found. Run `mdany doctor`.", exit_code=2) from None

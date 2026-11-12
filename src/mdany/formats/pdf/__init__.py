@@ -57,7 +57,7 @@ class PdfFormat:
             "--metadata", f"lang={doc.options.get('lang', 'zh-CN')}",   # CJK font fallback
             # Linking the theme CSS also stops pandoc from adding its default CSS
             # (max-width 36em etc.); `-V document-css=false` does not work (design 10.1 item 8).
-            "--css", str(theme.file(self.engine.STYLE_FILE).resolve()),
+            "--css", theme.file(self.engine.STYLE_FILE).resolve().as_uri(),
         ]
         if doc.options.get("toc"):
             extra += ["--toc", f"--toc-depth={doc.options.get('toc_depth', 2)}"]
@@ -72,6 +72,7 @@ class PdfFormat:
                 encoding="utf-8",
             )
             extra += ["--include-in-header", str(style)]
+        _file_uris(doc.ast)
         table_breaks.apply(doc.ast)
         if doc.options.get("fit_code_to_page"):
             fit.apply(doc.ast)
@@ -84,3 +85,16 @@ class PdfFormat:
         out.parent.mkdir(parents=True, exist_ok=True)
         self.engine.render(html, out)
         return out
+
+
+def _file_uris(ast: pf.Doc) -> None:
+    """Write local image paths as file:// URIs.
+
+    The HTML engine reads src as a URL. A Windows path such as C:\\x\\a.png would
+    parse as scheme "c"; a file URI is correct on every platform.
+    """
+    def action(elem, _ast):
+        if isinstance(elem, pf.Image) and elem.url and Path(elem.url).is_absolute():
+            elem.url = Path(elem.url).as_uri()
+
+    ast.walk(action)

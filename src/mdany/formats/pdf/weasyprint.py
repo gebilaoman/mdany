@@ -27,7 +27,7 @@ REQUIRES = [
             "macos": "brew install pango",
             "debian": "sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0",
             "fedora": "sudo dnf install -y pango",
-            "windows": "see https://doc.courtbouillon.org/weasyprint/stable/first_steps.html",
+            "windows": "MSYS2: pacman -S mingw-w64-x86_64-pango; add C:\\msys64\\mingw64\\bin to PATH",
         },
     )
 ]
