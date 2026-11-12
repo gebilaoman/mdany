@@ -25,9 +25,10 @@ def pandoc_path() -> str:
     try:
         import pypandoc
 
-        bundled = Path(pypandoc.__file__).parent / "files" / "pandoc"
-        if bundled.is_file():
-            return str(bundled)
+        files = Path(pypandoc.__file__).parent / "files"
+        for name in ("pandoc", "pandoc.exe"):        # pandoc.exe on Windows
+            if (files / name).is_file():
+                return str(files / name)
     except ImportError:
         pass
     found = shutil.which("pandoc")
