@@ -1,12 +1,13 @@
 import panflute as pf
 
+from mdany.core import pandoc
 from mdany.formats.pdf import table_breaks
 
 ZWSP = table_breaks.ZWSP
 
 
 def _doc(md: str) -> pf.Doc:
-    return pf.convert_text(md, input_format="gfm", standalone=True)
+    return pandoc.read_text(md)
 
 
 def test_breaks_only_inside_table_cells_and_long_values():

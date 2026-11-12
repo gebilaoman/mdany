@@ -27,7 +27,7 @@ jobs:
       - uses: msys2/setup-msys2@v2
         with:
           msystem: MINGW64
-          location: C:\
+          release: false        # use the MSYS2 that the runner has at C:\msys64
           install: >-
             mingw-w64-x86_64-pango
             mingw-w64-x86_64-graphviz

@@ -58,7 +58,11 @@ def _run(args: list[str], stdin: str) -> str:
 
 def read(source: Path, input_format: str = "gfm") -> pf.Doc:
     """Read a Markdown file into a panflute syntax tree."""
-    text = source.read_text(encoding="utf-8")
+    return read_text(source.read_text(encoding="utf-8"), input_format)
+
+
+def read_text(text: str, input_format: str = "gfm") -> pf.Doc:
+    """Read Markdown text into a panflute syntax tree (bundled pandoc, not the one on PATH)."""
     out = _run(["-f", input_format, "-t", "json"], text)
     return pf.load(io.StringIO(out))
 
