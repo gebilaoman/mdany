@@ -7,12 +7,12 @@ Convert a set of Markdown documents into a PDF / DOCX submission package.
 - One `mdany.toml` holds the skip list, copy list and output naming for the whole package.
 - Source-code excerpts: one section per page, running header, font sized to fit the page.
 
-Status: in development (target v0.1.0: replace the build scripts of one real project).
+Status: v0.1.0. It replaces the build scripts of one real project.
 
 ## Install
 
 ```bash
-uv tool install git+https://github.com/gebilaoman/mdany
+uv tool install git+https://github.com/gebilaoman/mdany@v0.1.0
 mdany doctor               # checks pandoc, weasyprint (pango), graphviz, rsvg-convert
 ```
 

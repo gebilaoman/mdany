@@ -1,6 +1,6 @@
 [project]
 name = "mdany"
-version = "0.1.0.dev0"
+version = "0.1.0"
 description = "Convert a set of Markdown documents into a PDF / DOCX submission package"
 readme = "README.md"
 license = "MIT"

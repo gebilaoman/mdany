@@ -1,6 +1,6 @@
 """mdany: convert a set of Markdown documents into a PDF / DOCX submission package."""
 
-__version__ = "0.1.0.dev0"
+__version__ = "0.1.0"
 
 
 class MdanyError(Exception):
